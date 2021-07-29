@@ -6,11 +6,20 @@ import { useRecoilState } from 'recoil';
 import { CommentsState, CommentFormIndex } from '../state';
 import { NestedComment } from './nestedComment';
 
+interface IComment {
+    content: string,
+    created_at: string,
+    nestedComments: []
+}
 
-export const Comment = ({commentId}:any) => {
+interface ICommentProps {
+    commentId: number 
+}
+
+export const Comment = ({commentId}:ICommentProps) => {
     const [comments, setComments] = useRecoilState(CommentsState);
     const [foldIndex, setFoldIndex] = useRecoilState(CommentFormIndex);
-    const [comment, setComment] = useState({content: "", created_at: "", nestedComments: []})
+    const [comment, setComment] = useState<IComment>({content: "", created_at: "", nestedComments: []})
    
     useEffect(() => {
         const comment = comments.filter((comment) => (comment["id"] === commentId))[0];
@@ -19,10 +28,10 @@ export const Comment = ({commentId}:any) => {
 
 
     const onClick = () => {
-        if (!foldIndex || foldIndex !== commentId) {
+        if (foldIndex === -1 || foldIndex !== commentId) {
             setFoldIndex(commentId);
         } else {
-            setFoldIndex(null)
+            setFoldIndex(-1)
         }
     }
 
@@ -35,11 +44,11 @@ export const Comment = ({commentId}:any) => {
                     </div>
                     <div>
                         <h1>익명</h1>
-                        <h1>{comment["created_at"]}</h1>
+                        <h1>{comment.created_at}</h1>
                     </div>
                 </div>
                 <div>
-                    <h1>{comment["content"]}</h1>
+                    <h1>{comment.created_at}</h1>
                     <button className="my-4" onClick={onClick}>답글 작성</button>
                     {commentId === foldIndex && <TinyCommentForm id={commentId} type={"nestedComment"}/>}
                 </div>

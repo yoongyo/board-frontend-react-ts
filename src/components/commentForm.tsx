@@ -3,7 +3,11 @@ import { BACKEND_URL } from '../api/backendURL';
 import { useRecoilState } from 'recoil';
 import { CommentsState } from '../state';
 
-export const CommentForm = ({ postId }:any) => {
+interface IProps {
+    postId: number
+}
+
+export const CommentForm = ({ postId }:IProps) => {
     const [content, setContent] = useState("");
     const [comments, setComments] = useRecoilState(CommentsState);
 
@@ -23,8 +27,8 @@ export const CommentForm = ({ postId }:any) => {
         })
     } 
 
-    const onChange = (event:any) => {
-        setContent(event.target.value);
+    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setContent(e.target.value);
     }
 
     return (

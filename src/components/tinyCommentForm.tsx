@@ -3,7 +3,13 @@ import { BACKEND_URL } from '../api/backendURL';
 import { useRecoilState } from 'recoil';
 import { CommentsState, CommentFormIndex, NestedCommentFormIndex } from '../state';
 
-export const TinyCommentForm = ({ id, type }:any) => {
+
+interface IProps {
+    id: number,
+    type: string
+}
+
+export const TinyCommentForm = ({ id, type }:IProps) => {
     const [content, setContent] = useState("");
     const [comments, setComments] = useRecoilState(CommentsState);
     const [foldComment, setFoldComment] = useRecoilState(CommentFormIndex);
@@ -22,22 +28,22 @@ export const TinyCommentForm = ({ id, type }:any) => {
             setComments(json)
             setContent("");
             if (type === "nestedComment"){
-                setFoldComment(null);
+                setFoldComment(-1);
             } else {
-                setFoldNested(null)
+                setFoldNested(-1)
             }
         })
     } 
 
-    const onChange = (event:any) => {
-        setContent(event.target.value);
+    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setContent(e.target.value);
     }
 
     return (
         <div className="bg-third px-6 py-6">
             <div className="border border-b p-3 rounded-tl-md rounded-tr-md">
                 <h1 className="mb-3">익명</h1>
-                <textarea className="w-full h-10"  onChange={onChange} value={content}/>
+                <textarea className="w-full h-10" onChange={onChange} value={content}/>
             </div>
             <div className="flex border border-t-0 rounded-bl-md rounded-br-md p-3">
                 <div className="flex-grow"></div>

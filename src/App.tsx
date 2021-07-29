@@ -3,7 +3,7 @@ import { MainRouter } from './routers/router';
 import {RecoilRoot, atom, selector, useRecoilState,  useRecoilValue } from 'recoil';
 
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <RecoilRoot>
             <MainRouter/>

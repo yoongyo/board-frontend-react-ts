@@ -23,12 +23,12 @@ const PostForm = () => {
             history.push('/');
         })
     }
-    const onChangeTitle = (event:any) => {
-        setTitle(event.target.value);
+    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
     }
 
-    const onChangeContent = (event:any) => {
-        const text = event.target.value;
+    const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.target.value;
         if (text.length < 1200) {
             setContent(text);
             setContentLength(text.length);

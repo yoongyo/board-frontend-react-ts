@@ -7,10 +7,10 @@ export const CommentsState = atom({
 
 export const CommentFormIndex = atom( {
     key: "CommentFormIndex",
-    default: null
+    default: -1
 })
 
 export const NestedCommentFormIndex = atom({
     key: "NestedCommentForm",
-    default: null
+    default: -1
 })
