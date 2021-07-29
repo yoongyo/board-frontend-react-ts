@@ -22,7 +22,7 @@ interface ILocation {
 }
 
 const PostDetail : React.FunctionComponent<RouteComponentProps<ILocation>> = ({location}) => {
-    const [post, setPost] = useState<post>({id: "", title: "", created_at: "", content: "", views: 0, comments: []});
+    const [post, setPost] = useState<post>({id: 0, title: "", created_at: "", content: "", views: 0, comments: []});
     const [comments, setComments] = useRecoilState(CommentsState);
     const pathName = location.pathname;
 

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import profile from '../img/profile4.jpg';
-import { NestedCommentForm } from './nestedCommentForm';
 import { TinyCommentForm } from './tinyCommentForm';
 import { useRecoilState } from 'recoil';
 import { CommentsState, NestedCommentFormIndex } from '../state';

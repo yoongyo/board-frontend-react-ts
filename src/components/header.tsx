@@ -10,7 +10,7 @@ const Header = () => {
                 <DrawerNavigation/>
             </div>
             <div className="text-center sm:max-w-3xl sm:mx-auto sm:text-left">
-                <Link className="text-xl sm:text-2xl font-medium box-content" to="/">MOVE <small style={{color: '#c0c0c0', 'fontWeight': 500}}>Board</small></Link>
+                <Link className="text-xl sm:text-2xl font-bold box-content" to="/">MOVE <small style={{color: '#c0c0c0', 'fontWeight': 500}}>Board</small></Link>
             </div>
         </div>
     )
