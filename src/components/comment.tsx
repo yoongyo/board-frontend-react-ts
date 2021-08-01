@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { BACKEND_URL } from '../api/backendURL';
 import profile from '../img/profile4.jpg';
 import { TinyCommentForm } from './tinyCommentForm';
 import { useRecoilState } from 'recoil';
@@ -28,10 +27,10 @@ export const Comment = ({commentId}:ICommentProps) => {
 
 
     const onClick = () => {
-        if (foldIndex === -1 || foldIndex !== commentId) {
+        if (foldIndex === 0 || foldIndex !== commentId) {
             setFoldIndex(commentId);
         } else {
-            setFoldIndex(-1)
+            setFoldIndex(0)
         }
     }
 
@@ -48,13 +47,13 @@ export const Comment = ({commentId}:ICommentProps) => {
                     </div>
                 </div>
                 <div>
-                    <h1>{comment.created_at}</h1>
+                    <h1 style={{wordBreak: 'break-word'}}>{comment.content}</h1>
                     <button className="my-4" onClick={onClick}>답글 작성</button>
                     {commentId === foldIndex && <TinyCommentForm id={commentId} type={"nestedComment"}/>}
                 </div>
             </div>
             {comment["nestedComments"].map((nestedComment) => (
-                <NestedComment nestedCommentId={nestedComment["id"]} commentId={commentId}/>
+                <NestedComment nestedCommentId={nestedComment["id"]} commentId={commentId} key={nestedComment["id"]}/>
             ))}
         </>
     )

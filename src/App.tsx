@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainRouter } from './routers/router';
-import {RecoilRoot, atom, selector, useRecoilState,  useRecoilValue } from 'recoil';
+import {RecoilRoot} from 'recoil';
 
 
 const App: React.FC = () => {

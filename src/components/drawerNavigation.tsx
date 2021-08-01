@@ -20,7 +20,7 @@ export const DrawerNavigation = () => {
             <button onClick={toggleDrawer} className="p-1"><FontAwesomeIcon icon={faBars} size="lg"/></button>
             <Drawer open={isOpen} onClose={toggleDrawer} direction='left' style={DrawerStyle}>
                 <div className="p-8 border-b border-gray-600">
-                    <h1 className="text-white">MOVE Board</h1>
+                    <h1 className="text-white">MOVE 게시판</h1>
                 </div>
                 <nav className="text-white">
                     <Link className="block py-3 px-8 border-b border-gray-600 hover:bg-gray-600" to="/create">Create Post</Link>

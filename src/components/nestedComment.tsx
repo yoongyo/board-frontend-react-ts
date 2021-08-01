@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { BACKEND_URL } from '../api/backendURL';
 import profile from '../img/profile4.jpg';
 import { LastComment } from './LastComment';
 import { TinyCommentForm } from './tinyCommentForm';
@@ -24,20 +23,20 @@ interface INestedCommentProps {
 export const NestedComment = ({nestedCommentId, commentId}:INestedCommentProps) => {
     const [comments, setComments] = useRecoilState(CommentsState);
     const [foldIndex, setFoldIndex] = useRecoilState(NestedCommentFormIndex);
-    const [nestedComment, setNestedComment] = useState<INestedComment>({id: -1, content: "", created_at: "", lastComments: []})
+    const [nestedComment, setNestedComment] = useState<INestedComment>({id: 0, content: "", created_at: "", lastComments: []})
 
     useEffect(() => {
         const comment = comments.filter((comment) => (comment["id"] === commentId))[0];
         const nestedComments: [] = comment["nestedComments"]
-        const nestedComment = nestedComments.filter((nestedComment:INestedComment) => (nestedComment.id === nestedCommentId))[0]
-        setNestedComment(nestedComment);
-    }, [])
+        const nestedCommentd = nestedComments.filter((nestedComment:INestedComment) => (nestedComment.id === nestedCommentId))[0]
+        setNestedComment(nestedCommentd);
+    }, [foldIndex])
 
     const onClick = () => {
-        if (foldIndex === -1 || foldIndex !== nestedComment.id) {
+        if (foldIndex === 0 || foldIndex !== nestedComment.id) {
             setFoldIndex(nestedComment.id);
         } else {
-            setFoldIndex(-1);
+            setFoldIndex(0);
         }
     }
 
@@ -60,10 +59,9 @@ export const NestedComment = ({nestedCommentId, commentId}:INestedCommentProps) 
                 </div>
             </div>
             {nestedComment.lastComments.map((lastComments) => (
-                <LastComment lastCommentId={lastComments["id"]} nestedCommentId={nestedComment.id} commentId={commentId}/>
+                <LastComment lastCommentId={lastComments["id"]} nestedCommentId={nestedComment.id} commentId={commentId} key={lastComments["id"]}/>
             ))}
         </>
     )
 }
-
 

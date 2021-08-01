@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { BACKEND_URL } from '../api/backendURL';
 import { useRecoilState } from 'recoil';
 import { CommentsState, CommentFormIndex, NestedCommentFormIndex } from '../state';
@@ -16,7 +16,7 @@ export const TinyCommentForm = ({ id, type }:IProps) => {
     const [foldNested, setFoldNested] = useRecoilState(NestedCommentFormIndex);
 
     const onClick = () => {
-        fetch(BACKEND_URL+'/'+type+'/'+id+'/'+type+'-create', {
+        fetch(BACKEND_URL+'/'+type+'/create/'+id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,9 +28,9 @@ export const TinyCommentForm = ({ id, type }:IProps) => {
             setComments(json)
             setContent("");
             if (type === "nestedComment"){
-                setFoldComment(-1);
+                setFoldComment(0);
             } else {
-                setFoldNested(-1)
+                setFoldNested(0)
             }
         })
     } 

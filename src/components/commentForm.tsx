@@ -12,7 +12,7 @@ export const CommentForm = ({ postId }:IProps) => {
     const [comments, setComments] = useRecoilState(CommentsState);
 
     const onClick = () => {
-        fetch(BACKEND_URL+'/comment/'+postId+'/comment-create', {
+        fetch(BACKEND_URL+'/comment/'+'create/'+postId, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,13 @@ export const CommentForm = ({ postId }:IProps) => {
     } 
 
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setContent(e.target.value);
+        const text = e.target.value;
+        if (text.length < 301) {
+            setContent(text);
+            setContent(e.target.value);
+        } else {
+            alert("300자 안에서 작성해주세요.");
+        }
     }
 
     return (
@@ -39,7 +45,7 @@ export const CommentForm = ({ postId }:IProps) => {
             </div>
             <div className="flex border border-t-0 rounded-bl-md rounded-br-md p-3">
                 <div className="my-auto">
-                    <h1>0/300</h1>
+                    <h1>{content.length}/300</h1>
                 </div>
                 <div className="flex-grow"></div>
                 <div className="">

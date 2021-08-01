@@ -2,26 +2,25 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../api/backendURL';
 import Header from '../components/header';
-import socketIOClient  from 'socket.io-client';
+import { useRecoilState } from 'recoil';
+import { PostState } from '../state';
 
 
-function PostList(props: any) {
-    console.log(props)
+function PostList() {
     const [posts, setPosts] = useState([]);
-    // const socket = socketIOClient ('http://localhost:5000');
 
     useEffect(() => {
-        // socket.emit("hello", 'socket');
-
-        fetch(BACKEND_URL + '/post-list', {
+        fetch(BACKEND_URL + '/post/list', {
             method: 'GET',
         })
         .then(res => res.json())
         .then(json => {
-            setPosts(json);
-            console.log(json)
+            console.log(json);
+            setPosts(json.reverse());
         })
     }, [])
+
+
     return (
         <>
             <Header/>

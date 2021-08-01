@@ -2,38 +2,49 @@ import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { PostState } from '../state';
+import socketIOClient from "socket.io-client";
 
 
 const PostForm = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [contentLength, setContentLength] = useState(0);
+    const [posts, setPosts] = useRecoilState(PostState);
 
     let history = useHistory();
 
     const onClick = () => {
-        fetch(BACKEND_URL+'/create', {
+        fetch(BACKEND_URL+'/post/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({title:title, content:content})
         })
-        .then(json => {
+        .then(res => {
+            console.log(res)
             history.push('/');
         })
+        // const socket = socketIOClient('http://127.0.0.1:9000');
+        // socket.emit('post-create', { title: title, content: content });
+        // socket.on('my response', (msg) => {
+        //     console.log(msg);
+        // })
     }
+
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
 
     const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.target.value;
-        if (text.length < 1200) {
+        if (text.length < 1201) {
             setContent(text);
             setContentLength(text.length);
         } else {
-            console.log("넘어섰어");
+            alert("1200자 안에서 작성해주세요.");
         }
     }
 
