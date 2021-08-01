@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../api/backendURL';
 import Header from '../components/header';
-import { useRecoilState } from 'recoil';
-import { PostState } from '../state';
 
 
 function PostList() {

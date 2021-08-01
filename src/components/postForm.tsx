@@ -2,8 +2,6 @@ import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL } from '../api/backendURL';
 import { useHistory } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { PostState } from '../state';
 import socketIOClient from "socket.io-client";
 
 
@@ -11,7 +9,6 @@ const PostForm = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [contentLength, setContentLength] = useState(0);
-    const [posts, setPosts] = useRecoilState(PostState);
 
     let history = useHistory();
 
