@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# board-frontend-react-ts
 
 ### 실행
 
